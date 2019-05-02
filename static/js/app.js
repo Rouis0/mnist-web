@@ -17,8 +17,20 @@ saveBtn.addEventListener("click", function (event) {
     if (mnistPad.isEmpty()) {
         alert("请书写一个数字");
     } else {
-        let src = mnistPad.toDataURL("image/png")
-        console.log(src)
+        
+
+        var canvas = document.getElementById("canvas")
+
+        var canvas2  = document.getElementById("canvas-min");
+        canvas2.width  = 28;
+        canvas2.height = 28;
+        var ctx2 = canvas2.getContext("2d");
+        ctx2.fillStyle="white";
+        ctx2.fillRect(0,0,canvas2.width,canvas2.height);
+        ctx2.drawImage(canvas,0, 0, 28,28)
+
+        console.log(canvas2.toDataURL("image/png"))
+        let src = canvas2.toDataURL("image/png")
         uploadImage(src)
 
     }
@@ -56,7 +68,7 @@ function uploadImage(dataURI) {
     };
 
     request.open("POST", "http://www.rouis.tech:8090");
-    // request.open("POST", "http://localhost:8090");
+    // request.open("POST", "http://localhost:8080");
     request.send(formData);
 };
 
